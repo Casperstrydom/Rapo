@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/routes/users.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1753472337388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1753472337388,
+            "name": "Commit-0",
+            "content": "const express = require(\"express\");\r\nconst router = express.Router();\r\nconst auth = require(\"../middleware/auth\");\r\nconst { profilePicUpload } = require(\"../middleware/upload\");\r\nconst { uploadProfilePic, getPublicProfile } = require(\"../controllers/users\");\r\n\r\nrouter.post(\"/profile-pic\", auth, profilePicUpload, uploadProfilePic);\r\nrouter.get(\"/public/:userId\", getPublicProfile);\r\n\r\nmodule.exports = router;"
+        }
+    ]
+}

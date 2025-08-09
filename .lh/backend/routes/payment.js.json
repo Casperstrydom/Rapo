@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/routes/payment.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1753713374958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1753713374958,
+            "name": "Commit-0",
+            "content": "const express = require(\"express\");\r\nconst router = express.Router();\r\nconst Paystack = require(\"paystack-api\")(process.env.PAYSTACK_SECRET_KEY);\r\n\r\n// Initialize Payment\r\nrouter.post(\"/init-payment\", async (req, res) => {\r\n  try {\r\n    const { email, amount } = req.body;\r\n\r\n    const response = await Paystack.transaction.initialize({\r\n      email,\r\n      amount: amount * 100, // Paystack uses kobo/cent (e.g., 5000 = ₦50)\r\n      currency: \"NGN\", // 'GHS', 'USD', 'ZAR' for other countries\r\n      callback_url: \"http://localhost:3000/verify-payment\", // Frontend callback\r\n    });\r\n\r\n    res.json({ paymentUrl: response.data.authorization_url });\r\n  } catch (error) {\r\n    res.status(500).json({ error: error.message });\r\n  }\r\n});\r\n\r\n// Verify Payment (Callback)\r\nrouter.get(\"/verify-payment/:reference\", async (req, res) => {\r\n  try {\r\n    const { reference } = req.params;\r\n    const response = await Paystack.transaction.verify(reference);\r\n\r\n    if (response.data.status === \"success\") {\r\n      res.json({ success: true, data: response.data });\r\n    } else {\r\n      res.json({ success: false, error: \"Payment failed\" });\r\n    }\r\n  } catch (error) {\r\n    res.status(500).json({ error: error.message });\r\n  }\r\n});\r\n\r\nmodule.exports = router;"
+        }
+    ]
+}

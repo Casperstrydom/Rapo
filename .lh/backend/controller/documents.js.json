@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/controller/documents.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1753472389379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1753472974195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n const Document = require(\"../models/Document\");\r\n-const User = require(\"../models/User\");\r\n+const User = require(\"../models/models\");\r\n const fs = require(\"fs\");\r\n const path = require(\"path\");\r\n \r\n exports.uploadDocuments = async (req, res) => {\r\n"
+                }
+            ],
+            "date": 1753472389379,
+            "name": "Commit-0",
+            "content": "const Document = require(\"../models/Document\");\r\nconst User = require(\"../models/User\");\r\nconst fs = require(\"fs\");\r\nconst path = require(\"path\");\r\n\r\nexports.uploadDocuments = async (req, res) => {\r\n  try {\r\n    const { documentType } = req.body;\r\n    const user = await User.findById(req.user.id);\r\n    \r\n    // Check if user already has documents of this type\r\n    const existingDoc = await Document.findOne({ \r\n      user: req.user.id, \r\n      documentType \r\n    });\r\n    \r\n    if (existingDoc && existingDoc.isComplete) {\r\n      return res.status(400).json({ msg: \"Document upload already completed\" });\r\n    }\r\n    \r\n    let document;\r\n    if (existingDoc) {\r\n      // Update existing document\r\n      const files = req.files.map(file => ({\r\n        name: file.originalname,\r\n        path: file.path,\r\n        size: file.size\r\n      }));\r\n      \r\n      existingDoc.files = [...existingDoc.files, ...files];\r\n      document = await existingDoc.save();\r\n    } else {\r\n      // Create new document\r\n      const files = req.files.map(file => ({\r\n        name: file.originalname,\r\n        path: file.path,\r\n        size: file.size\r\n      }));\r\n      \r\n      document = new Document({\r\n        user: req.user.id,\r\n        documentType,\r\n        files\r\n      });\r\n      await document.save();\r\n      \r\n      // Add document reference to user\r\n      user.documents.push(document._id);\r\n      await user.save();\r\n    }\r\n    \r\n    res.json(document);\r\n  } catch (err) {\r\n    console.error(err.message);\r\n    res.status(500).send(\"Server error\");\r\n  }\r\n};\r\n\r\n// [Include all other document controller functions from previous implementation]"
+        }
+    ]
+}

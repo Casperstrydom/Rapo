@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/routes/documents.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1753472314296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1753472314296,
+            "name": "Commit-0",
+            "content": "const express = require(\"express\");\r\nconst router = express.Router();\r\nconst auth = require(\"../middleware/auth\");\r\nconst { documentUpload } = require(\"../middleware/upload\");\r\nconst {\r\n  uploadDocuments,\r\n  completeDocument,\r\n  deleteDocument,\r\n  getUserDocuments,\r\n  getAllUsersWithDocuments\r\n} = require(\"../controllers/documents\");\r\n\r\nrouter.post(\"/\", auth, documentUpload, uploadDocuments);\r\nrouter.put(\"/:documentId/complete\", auth, completeDocument);\r\nrouter.delete(\"/:documentId\", auth, deleteDocument);\r\nrouter.get(\"/my-documents\", auth, getUserDocuments);\r\nrouter.get(\"/all-users\", auth, getAllUsersWithDocuments);\r\n\r\nmodule.exports = router;"
+        }
+    ]
+}

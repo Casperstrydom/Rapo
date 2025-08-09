@@ -1,0 +1,34 @@
+{
+    "sourceFile": "backend/routes/home.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1753434378223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1753442281229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,10 @@\n const express = require(\"express\");\r\n const router = express.Router();\r\n-const { uploadFile, deleteDocument } = require(\"../controller/homeController\");\r\n+const { uploadFile, deleteDocument, publicView } = require(\"../controller/homeController\");\r\n+const authMiddleware = require(\"../middleware/authMiddleware\");\r\n \r\n-// POST /api/home/upload\r\n-router.post(\"/upload\", uploadFile);\r\n+router.post(\"/upload\", authMiddleware, uploadFile);\r\n+router.post(\"/delete-document\", authMiddleware, deleteDocument);\r\n+router.get(\"/public-view\", authMiddleware, publicView);\r\n \r\n-// POST /api/home/delete-document\r\n-router.post(\"/delete-document\", deleteDocument);\r\n-\r\n module.exports = router;\r\n"
+                },
+                {
+                    "date": 1753454009921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n+// routes/home.js\r\n const express = require(\"express\");\r\n const router = express.Router();\r\n-const { uploadFile, deleteDocument, publicView } = require(\"../controller/homeController\");\r\n-const authMiddleware = require(\"../middleware/authMiddleware\");\r\n+const { uploadFile } = require(\"../controller/homeController\");\r\n \r\n-router.post(\"/upload\", authMiddleware, uploadFile);\r\n-router.post(\"/delete-document\", authMiddleware, deleteDocument);\r\n-router.get(\"/public-view\", authMiddleware, publicView);\r\n+// POST /api/upload\r\n+router.post(\"/upload\", uploadFile);\r\n \r\n module.exports = router;\r\n"
+                },
+                {
+                    "date": 1753459272272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,14 @@\n-// routes/home.js\r\n const express = require(\"express\");\r\n const router = express.Router();\r\n-const { uploadFile } = require(\"../controller/homeController\");\r\n+const { \r\n+  uploadFile,\r\n+  deleteDocument,\r\n+  getPublicViewUsers\r\n+} = require(\"../controller/homeController\");\r\n+const authMiddleware = require(\"../middleware/authMiddleware\");\r\n \r\n-// POST /api/upload\r\n-router.post(\"/upload\", uploadFile);\r\n+router.post(\"/upload\", authMiddleware, uploadFile);\r\n+router.post(\"/delete-document\", authMiddleware, deleteDocument);\r\n+router.get(\"/public-view\", authMiddleware, getPublicViewUsers);\r\n \r\n-module.exports = router;\r\n+module.exports = router;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1753698653077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+const express = require(\"express\");\r\n+const router = express.Router();\r\n+const { \r\n+  uploadFile,\r\n+  deleteDocument,\r\n+  getPublicViewUsers\r\n+} = require(\"../controller/homeController\");\r\n+const authMiddleware = require(\"../middleware/authMiddleware\");\r\n+\r\n+router.post(\"/upload\", authMiddleware, uploadFile);\r\n+router.post(\"/delete-document\", authMiddleware, deleteDocument);\r\n+router.get(\"/public-view\", authMiddleware, getPublicViewUsers);\r\n+\r\n+module.exports = router;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1753434378223,
+            "name": "Commit-0",
+            "content": "const express = require(\"express\");\r\nconst router = express.Router();\r\nconst { uploadFile, deleteDocument } = require(\"../controller/homeController\");\r\n\r\n// POST /api/home/upload\r\nrouter.post(\"/upload\", uploadFile);\r\n\r\n// POST /api/home/delete-document\r\nrouter.post(\"/delete-document\", deleteDocument);\r\n\r\nmodule.exports = router;\r\n"
+        }
+    ]
+}

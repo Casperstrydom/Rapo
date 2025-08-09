@@ -1,0 +1,22 @@
+{
+    "sourceFile": "backend/controller/users.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1753472418534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1753472984973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const User = require(\"../models/User\");\r\n+const User = require(\"../models/models\");\r\n const fs = require(\"fs\");\r\n const path = require(\"path\");\r\n \r\n exports.uploadProfilePic = async (req, res) => {\r\n"
+                }
+            ],
+            "date": 1753472418534,
+            "name": "Commit-0",
+            "content": "const User = require(\"../models/User\");\r\nconst fs = require(\"fs\");\r\nconst path = require(\"path\");\r\n\r\nexports.uploadProfilePic = async (req, res) => {\r\n  try {\r\n    const user = await User.findById(req.user.id);\r\n    \r\n    // Delete old profile pic if exists\r\n    if (user.profilePic && fs.existsSync(user.profilePic)) {\r\n      fs.unlink(user.profilePic, err => {\r\n        if (err) console.error(`Error deleting old profile pic: ${err}`);\r\n      });\r\n    }\r\n    \r\n    // Update user with new profile pic path\r\n    user.profilePic = req.file.path;\r\n    await user.save();\r\n    \r\n    res.json({ profilePic: user.profilePic });\r\n  } catch (err) {\r\n    console.error(err.message);\r\n    res.status(500).send(\"Server error\");\r\n  }\r\n};\r\n\r\n// [Include other user controller functions from previous implementation]"
+        }
+    ]
+}

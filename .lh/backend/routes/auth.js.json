@@ -1,0 +1,26 @@
+{
+    "sourceFile": "backend/routes/auth.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1753472517584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1753473133488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   updateUser,\r\n   uploadProfilePic,\r\n   changePassword,\r\n   logoutUser\r\n-} = require(\"../controllers/authController\");\r\n+} = require(\"../controller/authController\")\r\n const authMiddleware = require(\"../middleware/authMiddleware\");\r\n const { profilePicUpload } = require(\"../middleware/upload\");\r\n \r\n // POST /api/auth/register - Register a new user\r\n"
+                },
+                {
+                    "date": 1753473815277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,34 +3,21 @@\n const { \r\n   registerUser, \r\n   loginUser,\r\n   getUserData,\r\n-  updateUser,\r\n-  uploadProfilePic,\r\n-  changePassword,\r\n-  logoutUser\r\n-} = require(\"../controller/authController\")\r\n+  updateUser\r\n+} = require(\"../controller/authController\");\r\n const authMiddleware = require(\"../middleware/authMiddleware\");\r\n-const { profilePicUpload } = require(\"../middleware/upload\");\r\n \r\n-// POST /api/auth/register - Register a new user\r\n+// POST /api/auth/register\r\n router.post(\"/register\", registerUser);\r\n \r\n-// POST /api/auth/login - Login user\r\n+// POST /api/auth/login\r\n router.post(\"/login\", loginUser);\r\n \r\n-// POST /api/auth/logout - Logout user\r\n-router.post(\"/logout\", authMiddleware, logoutUser);\r\n-\r\n // GET /api/auth/me - Get current user data\r\n router.get(\"/me\", authMiddleware, getUserData);\r\n \r\n // PUT /api/auth/update - Update user data\r\n router.put(\"/update\", authMiddleware, updateUser);\r\n \r\n-// PUT /api/auth/change-password - Change user password\r\n-router.put(\"/change-password\", authMiddleware, changePassword);\r\n-\r\n-// POST /api/auth/profile-pic - Upload profile picture\r\n-router.post(\"/profile-pic\", authMiddleware, profilePicUpload, uploadProfilePic);\r\n-\r\n module.exports = router;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1753472517584,
+            "name": "Commit-0",
+            "content": "const express = require(\"express\");\r\nconst router = express.Router();\r\nconst { \r\n  registerUser, \r\n  loginUser,\r\n  getUserData,\r\n  updateUser,\r\n  uploadProfilePic,\r\n  changePassword,\r\n  logoutUser\r\n} = require(\"../controllers/authController\");\r\nconst authMiddleware = require(\"../middleware/authMiddleware\");\r\nconst { profilePicUpload } = require(\"../middleware/upload\");\r\n\r\n// POST /api/auth/register - Register a new user\r\nrouter.post(\"/register\", registerUser);\r\n\r\n// POST /api/auth/login - Login user\r\nrouter.post(\"/login\", loginUser);\r\n\r\n// POST /api/auth/logout - Logout user\r\nrouter.post(\"/logout\", authMiddleware, logoutUser);\r\n\r\n// GET /api/auth/me - Get current user data\r\nrouter.get(\"/me\", authMiddleware, getUserData);\r\n\r\n// PUT /api/auth/update - Update user data\r\nrouter.put(\"/update\", authMiddleware, updateUser);\r\n\r\n// PUT /api/auth/change-password - Change user password\r\nrouter.put(\"/change-password\", authMiddleware, changePassword);\r\n\r\n// POST /api/auth/profile-pic - Upload profile picture\r\nrouter.post(\"/profile-pic\", authMiddleware, profilePicUpload, uploadProfilePic);\r\n\r\nmodule.exports = router;"
+        }
+    ]
+}

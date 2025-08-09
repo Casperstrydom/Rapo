@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/middleware/upload.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1753472359975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1753472359975,
+            "name": "Commit-0",
+            "content": "const multer = require(\"multer\");\r\nconst path = require(\"path\");\r\n\r\n// Document upload configuration\r\nconst documentStorage = multer.diskStorage({\r\n  destination: (req, file, cb) => {\r\n    cb(null, \"uploads/documents/\");\r\n  },\r\n  filename: (req, file, cb) => {\r\n    cb(null, `${req.user.id}-${Date.now()}${path.extname(file.originalname)}`);\r\n  }\r\n});\r\n\r\nconst documentUpload = multer({\r\n  storage: documentStorage,\r\n  limits: { fileSize: 1024 * 1024 * 1024 }, // 1GB\r\n  fileFilter: (req, file, cb) => {\r\n    checkFileType(file, cb);\r\n  }\r\n}).array(\"documents\", 3); // Allow up to 3 files per upload\r\n\r\n// Profile picture upload configuration\r\nconst profilePicStorage = multer.diskStorage({\r\n  destination: (req, file, cb) => {\r\n    cb(null, \"uploads/profilePics/\");\r\n  },\r\n  filename: (req, file, cb) => {\r\n    cb(null, `${req.user.id}-${Date.now()}${path.extname(file.originalname)}`);\r\n  }\r\n});\r\n\r\nconst profilePicUpload = multer({\r\n  storage: profilePicStorage,\r\n  fileFilter: (req, file, cb) => {\r\n    checkFileType(file, cb);\r\n  }\r\n}).single(\"profilePic\");\r\n\r\nfunction checkFileType(file, cb) {\r\n  const filetypes = /jpeg|jpg|png|gif|pdf|doc|docx|txt/;\r\n  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());\r\n  const mimetype = filetypes.test(file.mimetype);\r\n\r\n  if (mimetype && extname) {\r\n    return cb(null, true);\r\n  } else {\r\n    cb(\"Error: Only documents and images are allowed!\");\r\n  }\r\n}\r\n\r\nmodule.exports = { documentUpload, profilePicUpload };"
+        }
+    ]
+}
