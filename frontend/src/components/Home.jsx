@@ -208,7 +208,7 @@ function SatisfactionCertificate({ user, onClose, isPublicView = false }) {
 
                   {user.documentRequirements?.idDocumentFile && (
                     <div className="document-group">
-                      <h4>Praecipe:</h4>
+                      <h4>Other:</h4>
                       <div className="document-details">
                         <p className="upload-status">✅ Documents Uploaded</p>
                       </div>
@@ -311,7 +311,7 @@ export default function Home() {
       if (userData.documentRequirements?.witnessTestimonies?.length > 0)
         uploaded.push("928");
       if (userData.documentRequirements?.idDocumentFile)
-        uploaded.push("Praecipe");
+        uploaded.push("Other");
 
       setUploadedLabels(uploaded);
     } catch (error) {
@@ -543,7 +543,7 @@ export default function Home() {
                 }
               />
               <FileUpload
-                label="Praecipe"
+                label="Other"
                 documentType="idDocument"
                 onFileUploaded={handleFileUploaded}
                 onDelete={handleFileDeleted}
