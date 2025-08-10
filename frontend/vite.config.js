@@ -11,7 +11,7 @@ export default defineConfig({
       clientPort: 5173,
       protocol: 'ws',
     },
-    allowedHosts: 'all', // Allow requests from all hosts
+    cors: true, // Enable CORS
     proxy: {
       '/api': {
         target: import.meta.env.BACKEND_URL || 'http://localhost:5000',
