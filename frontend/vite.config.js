@@ -11,10 +11,7 @@ export default defineConfig({
       clientPort: 5173,
       protocol: 'ws',
     },
-    allowedHosts: [
-      'rapo.onrender.com', // Add your Render domain here
-      'localhost' // Keep localhost for local development
-    ],
+    allowedHosts: 'all', // Allow requests from all hosts
     proxy: {
       '/api': {
         target: import.meta.env.BACKEND_URL || 'http://localhost:5000',
