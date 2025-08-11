@@ -52,7 +52,7 @@ function FileUpload({
     try {
       setIsUploading(true);
       const token = localStorage.getItem("token");
-      await axios.post(`${process.env.REACT_APP_BASEURL}/api/home/upload`, formData, {
+      await axios.post(`${import.meta.env.VITE_BASEURL}/api/home/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ function FileUpload({
       setIsDeleting(true);
       const token = localStorage.getItem("token");
       await axios.post(
-        `${process.env.REACT_APP_BASEURL}/api/home/delete-document`,
+        `${import.meta.env.VITE_BASEURL}/api/home/delete-document`,
         { documentType },
         {
           headers: {
@@ -287,7 +287,7 @@ export default function Home() {
         return;
       }
 
-      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/api/auth/me`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASEURL}/api/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -328,7 +328,7 @@ export default function Home() {
       setLoadingPublicView(true);
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${process.env.REACT_APP_BASEURL}/api/home/public-view`,
+        `${import.meta.env.VITE_BASEURL}/api/home/public-view`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -372,7 +372,7 @@ export default function Home() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `${process.env.REACT_APP_BASEURL}/api/auth/update`,
+        `${import.meta.env.VITE_BASEURL}/api/auth/update`,
         {
           fullNames,
           familyName,

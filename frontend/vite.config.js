@@ -15,12 +15,8 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:5000', // You might need to update this too for Render
         changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        secure: false
       }
     }
-  },
-  define: {
-    'process.env': {}
   }
 });

@@ -47,7 +47,7 @@ const Payment = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BASEURL}/api/payment/init-payment`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASEURL}/api/payment/init-payment`, {
         amount: formData.amount,
         name: formData.name,
         email: formData.email || 'customer@example.com' // Default email if not provided

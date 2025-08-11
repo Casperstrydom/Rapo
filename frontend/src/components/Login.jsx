@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Navigation hook
 import "./Login.css";
-const BASEURL = process.env.REACT_APP_BASEURL || "http://localhost:5000"; // Use environment variable or default
+const BASEURL = import.meta.env.VITE_BASEURL || "http://localhost:5000"; // Use environment variable or default
 export default function Login({ onToggle, onSuccess }) {
   const navigate = useNavigate(); // ✅ Hook initialized
 
