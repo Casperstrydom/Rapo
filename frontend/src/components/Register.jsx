@@ -35,6 +35,7 @@ export default function Register({ onToggle, onSuccess }) {
     }
 
     try {
+	console.log(import.meta.env.VITE_BASEURL)
       const res = await fetch(`${import.meta.env.VITE_BASEURL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

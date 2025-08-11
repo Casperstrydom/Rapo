@@ -14,8 +14,6 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://localhost:5000', // You might need to update this too for Render
-        changeOrigin: true,
-        secure: false
       }
     }
   }
