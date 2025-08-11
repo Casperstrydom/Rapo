@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Payment from "./components/payment";
+import Payment from "./components/Payment";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
