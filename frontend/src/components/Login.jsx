@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Navigation hook
 import "./Login.css";
-
+const BASEURL = process.env.REACT_APP_BASEURL || "http://localhost:5000"; // Use environment variable or default
 export default function Login({ onToggle, onSuccess }) {
   const navigate = useNavigate(); // ✅ Hook initialized
 
@@ -29,7 +29,7 @@ export default function Login({ onToggle, onSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${BASEURL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
